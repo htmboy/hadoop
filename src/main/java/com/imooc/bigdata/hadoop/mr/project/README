@@ -1,0 +1,17 @@
+统计页面的浏览量
+    select count(1) from xxx;
+    一行记录做成一个固定的key， value赋值为1
+
+统计各个省份的流量
+    select province count(1) from xxx group by province;
+    地市信息我们是可以通过ip解析得到的  <== ip如何转换成城市信息
+    ip解析：收费
+
+统计页面的访问量: 把符合规则的pageId获取到，然后进行统计即可
+
+===> 存在的问题：每个MR作业都去全量读取待处理的原始日志，如果数据量很大，是不是会疯了？
+
+ETL: 全量数据不方便直接进行计算的，最好是进一步处理后再进行相应的维度统计分析
+    解析出你需要的字段：ip ==> 城市信息
+    去除一些你不需要的字段：不需要的字段就太多了。。。。。
+    ip/time/url/page_id/country/province/city
